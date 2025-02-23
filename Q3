@@ -1,0 +1,16 @@
+insert into departments (department_id,name) values (1,'sales'),(2,'development'),(3,'accounting'),(4,'human_resources'),(5,'information_system');
+
+insert into people (name,department_id) values ('佐々木ロウキ',1),('大谷ショウヘイ',1),('山本ヨシノブ',1),('山中サワオ',2),('真鍋ヨシアキ',2),('佐藤シンイチロウ',2),('上田ケンジ',2),('興津ユカ',3),('宮森アオイ',4),('坂木しずか',5);
+
+insert into reports (person_id,content)
+values
+(7,'ささささささささささ'),
+(8,'しししししししししし'),
+(9,'すすすすすすすすすす'),
+(10,'せせせせせせせせせせ'),
+(11,'そそそそそそそそそそ'),
+(11,'たたたたたたたたたた'),
+(13,'ちちちちちちちちちち'),
+(14,'つつつつつつつつつつ'),
+(15,'てててててててててて'),
+(16,'とととととととととと');

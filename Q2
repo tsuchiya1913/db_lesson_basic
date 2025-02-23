@@ -1,0 +1,1 @@
+alter table people add department_id	int(10) unsigned after email;

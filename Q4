@@ -1,0 +1,5 @@
+update people set department_id = 1 where person_id = '1';
+
+update people set department_id = 2 where person_id in ('2','3');
+
+update people set department_id = 3 where person_id in ('4','6');

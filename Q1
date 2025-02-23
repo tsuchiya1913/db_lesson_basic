@@ -1,0 +1,6 @@
+create table departments (
+    -> department_id int unsigned not null auto_increment primary key,
+    -> name varchar(20) not null,
+    -> created_at timestamp default CURRENT_TIMESTAMP,
+    -> updated_at timestamp default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    -> );
