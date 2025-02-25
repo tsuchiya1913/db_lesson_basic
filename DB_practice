@@ -70,7 +70,7 @@ select avg(age) as average_age from people where department_id = 2 and gender = 
 
 Q10
 <-- 下記に変更いたしました。 --!>
-select p.name,r.content,d.name from people p left outer join reports r using (person_id) left outer join departments d using (department_id);
+select p.name,r.content,d.name department_name from people p join reports r using (person_id) join departments d using (department_id);
 
 
 Q11
