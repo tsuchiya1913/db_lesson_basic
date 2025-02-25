@@ -1,0 +1,83 @@
+
+ Q1
+create table departments (
+    -> department_id int unsigned not null auto_increment primary key,
+    -> name varchar(20) not null,
+    -> created_at timestamp default CURRENT_TIMESTAMP,
+    -> updated_at timestamp default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    -> );
+ Q2
+ alter table people add department_id int(10) unsigned after email;
+
+ Q3
+insert into departments (department_id,name) values (1,'営業'),(2,'開発'),(3,'経理'),(4,'人事'),(5,'情報システム');
+sales→営業にカラム名を変更
+
+insert into people (name,department_id,email,department_id,age,gender)
+values
+('佐々木ロウキ',1,'sasaki_rouki@gizumo.jp',1,23,1),
+('大谷ショウヘイ',1,'ootani_shohei@gizumo.jp',30,1),
+('山本ヨシノブ',1,'yamamoto_yosinobu@gizumo.jp',26,1),
+('山中サワオ',2,'yamanaka_sawao@gizumo.jp'56,1),
+('真鍋ヨシアキ',2,'manabe_yosiaki@gizumo.jp',62,1),
+('佐藤シンイチロウ',2,'satoh_shinichirou@gizumo.jp',60,1),
+('上田ケンジ',2,'ueda_kenji@gizumo.jp',59,1),
+('興津ユカ',3,'okitsu_yuka@gizumo.jp',28,2),
+('宮森アオイ',4,'miyamori_aoi@gizumo.jp',23,2),
+('坂木しずか',5,'sakaki_sizuka@gizumo.jp',23,2);
+
+(name,department_id)のみカラムを追加した意図はなんでしょう?
+→person_idはauto_incrementにより自動的に割り振られるため追記の必要がないと判断。
+→emailについては今回は追加する必要がないと判断したため
+emalも入れる
+
+insert into reports (person_id,content)
+values
+(7,'ささささささささささ'),
+(8,'しししししししししし'),
+(9,'すすすすすすすすすす'),
+(10,'せせせせせせせせせせ'),
+(11,'そそそそそそそそそそ'),
+(11,'たたたたたたたたたた'),
+(13,'ちちちちちちちちちち'),
+(14,'つつつつつつつつつつ'),
+(15,'てててててててててて'),
+(16,'とととととととととと');
+
+Q4
+update people set department_id = 1 where person_id = '1';
+
+update people set department_id = 2 where person_id in ('2','3');
+
+update people set department_id = 3 where person_id in ('4','6');
+
+Q5
+select gender = 1,name from people order by age desc;
+
+[ask]
+対象レコードのみ絞り込んで抽出するためには何句を記述したらよかったでしょうか?
+→<--! where句を使用することにより対象レコードにのみの取得が可能になるため下記のクエリになります。 -->
+→select name,age from people where gender = 1 order by age desc;
+
+Q6
+<--! peopleのテーブルからdepartment_idが1に割り振られてる人の名前とメールアドレスと年齢のレコード情報を作成された順に取得する -->
+
+Q7
+<--! 失礼いたしました。修正しましたため確認お願いいたします。 -->
+
+select * from people where (age between 20 and 29 and gender = 2) or (age between 40 and 49 and gender = 1);
+
+Q8
+select * from people where department_id = 1 order by age asc;
+
+Q9
+select avg(age) as average_age from people where department_id = 2 and gender = 2;
+
+Q10
+<-- 下記に変更いたしました。 --!>
+select p.name,r.content,d.name department_name from people p join reports r using (person_id) join departments d using (department_id);
+
+
+Q11
+<-- 下記に変更いたしました。 --!>
+select p.name from people p left outer join reports r using (person_id) where report_id is null;

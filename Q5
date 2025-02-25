@@ -1,1 +1,0 @@
-select gender = 1,name from people order by age desc;

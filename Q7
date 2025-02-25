@@ -1,4 +1,0 @@
-select * from people where age between 20 and 29 and gender = 2;
-select * from people where age between 40 and 49 and gender = 1;
-
-select * from people where (age between 20 and 29 and gender = 2) or (age between 40 and 49 and gender = 1);
