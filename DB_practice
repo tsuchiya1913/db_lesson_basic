@@ -7,12 +7,24 @@ create table departments (
     -> updated_at timestamp default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
     -> );
  Q2
- alter table people add department_id	int(10) unsigned after email;
+ alter table people add department_id int(10) unsigned after email;
+[ask]
+追加カラムにdepartment_idを記述した意図はなんでしょうか?
+→peopleテーブルとdepartmentテーブルを紐づけられるようにするため
+
+[must]
+物理カラム名に修正してください！
+→Q2の「カラム物理名」にdepartment_idと記載がありますがこれとは何か違う物理名をつけるという認識でよろしかったでしょうか？
+
 
  Q3
 insert into departments (department_id,name) values (1,'sales'),(2,'development'),(3,'accounting'),(4,'human_resources'),(5,'information_system');
 
 insert into people (name,department_id) values ('佐々木ロウキ',1),('大谷ショウヘイ',1),('山本ヨシノブ',1),('山中サワオ',2),('真鍋ヨシアキ',2),('佐藤シンイチロウ',2),('上田ケンジ',2),('興津ユカ',3),('宮森アオイ',4),('坂木しずか',5);
+
+(name,department_id)のみカラムを追加した意図はなんでしょう?
+→person_idはauto_incrementにより自動的に割り振られるため追記の必要がないと判断。
+→emailについては今回は追加する必要がないと判断したため
 
 insert into reports (person_id,content)
 values
@@ -37,12 +49,16 @@ update people set department_id = 3 where person_id in ('4','6');
 Q5
 select gender = 1,name from people order by age desc;
 
+[ask]
+対象レコードのみ絞り込んで抽出するためには何句を記述したらよかったでしょうか?
+→<--! where句を使用することにより対象レコードにのみの取得が可能になるため下記のクエリになります。 -->
+→select name,age from people where gender = 1 order by age desc;
+
 Q6
 <--! peopleのテーブルからdepartment_idが1に割り振られてる人の名前とメールアドレスと年齢のレコード情報を作成された順に取得する -->
 
 Q7
-select * from people where age between 20 and 29 and gender = 2;
-select * from people where age between 40 and 49 and gender = 1;
+<--! 失礼いたしました。修正しましたため確認お願いいたします。 -->
 
 select * from people where (age between 20 and 29 and gender = 2) or (age between 40 and 49 and gender = 1);
 
@@ -53,7 +69,10 @@ Q9
 select avg(age) as average_age from people where department_id = 2 and gender = 2;
 
 Q10
-select name,content  from people inner join reports on people.person_id = reports.person_id;
+<-- 下記に変更いたしました。 --!>
+select p.name,r.content,d.name from people p left outer join reports r using (person_id) left outer join departments d using (department_id);
+
 
 Q11
-select name from people left outer join reports on people.person_id = reports.person_id where report_id is null;
+<-- 下記に変更いたしました。 --!>
+select p.name from people p left outer join reports r using (person_id) where report_id is null;
