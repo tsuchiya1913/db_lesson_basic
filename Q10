@@ -1,1 +1,0 @@
-select name,content  from people inner join reports on people.person_id = reports.person_id;

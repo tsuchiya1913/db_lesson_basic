@@ -1,1 +1,0 @@
-select * from people where department_id = 1 order by age asc;

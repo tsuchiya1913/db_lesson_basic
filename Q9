@@ -1,1 +1,0 @@
-select avg(age) as average_age from people where department_id = 2 and gender = 2;
